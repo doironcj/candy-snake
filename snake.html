@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        
+            html, body {
+               
+                margin: 0px;
+                border: 0px;
+                padding: 0px;
+            }
+            p{
+                font-size: 20px;
+            }
+            button{
+                font-size:20px;
+
+
+            }
+            #gl-canvas{
+                position:fixed;
+                
+                padding: 0px;
+                top: 0px;
+                left: 0px;
+                border: 0px;
+                margin: 0px;
+                z-index: -1;
+            }
+            #menu{
+                display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  margin-top: 200px;
+  
+                background-color:white;
+                opacity: .9;
+                z-index:1;
+   text-align: center;
+   font-style: oblique;
+                font-size: 30px;
+  
+  border: 3px solid red;
+  padding: 10px;
+  color: red;
+
+  display: none;
+
+            }
+            #scoremenu{
+
+            font-size: 30px;
+            }
+           
+            
+    </style>
+    <meta  http-equiv="Content-Type" content= "text/html;charset=utf-8">
+    <script type="text/javascript" src="Common/webgl-utils.js"></script>
+    <script type="text/javascript" src="Common/initShaders.js"></script>
+    <script type="text/javascript" src="Common/MV.js"></script>
+    <script id = "vertex-shader" type = "x-shader/x-vertex">
+    attribute vec4 positions;
+    uniform mat4 transform;
+    uniform mat4 view;
+    uniform mat4 scale;
+    
+    void main(){
+        gl_PointSize = 5.0;
+        gl_Position = scale*view*transform*positions;
+       
+        
+    }
+    
+    </script>
+    <script id = "fragment-shader" type = "x-shader/x-vertex">
+        precision mediump float;
+   uniform vec4 color;
+   
+    void main() {
+        gl_FragColor = color;
+
+    }
+    </script>
+    <script type="text/javascript" src = "snake.js"></script>
+</head>
+<body onload = "init()" onkeydown = "start_turn(event)" onkeyup = "stop_turn(event)" onresize="resize_canvas()" onmousemove="mouse_change_(event)">
+<p id = "score" >score: 0</p>
+
+<canvas id = "gl-canvas" height = "100%"  width = "100%" >
+
+
+
+</canvas>
+<div id = "menu">
+<h1>Candy Python</h1>
+<p id = "scoremenu">Use 'a' to turn right and 'd' to turn left. 
+    You may use the mouse as well.
+</p>
+<button id = "button" onclick="start_game()">Start Game</button>
+</div>
+
+</body >
+
+</html>
